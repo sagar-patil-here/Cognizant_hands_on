@@ -1,4 +1,4 @@
-# Java Hands-On Practice Projects
+# Java Hands-On Practice Repo
 
 ## Overview
 
