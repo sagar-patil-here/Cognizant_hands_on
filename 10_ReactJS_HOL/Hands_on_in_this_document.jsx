@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useState, useContext, createContext } from 'react';
 
-const HandsOn = () => {
+// Topic: Context API (createContext, useContext)
+const ThemeContext = createContext();
+
+const ThemeButton = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
     return (
-        <div>
-            <h1>ReactJS Hands-on Part 10</h1>
-            <p>Implement the exercises outlined in the document.</p>
-        </div>
+        <button 
+            onClick={toggleTheme}
+            style={{ 
+                background: theme === 'light' ? '#fff' : '#333', 
+                color: theme === 'light' ? '#000' : '#fff',
+                padding: '10px 20px'
+            }}
+        >
+            Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+        </button>
     );
 };
 
-export default HandsOn;
+export default function App() {
+    const [theme, setTheme] = useState('light');
+    
+    const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+
+    return (
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+            <div style={{ padding: '20px', background: theme === 'light' ? '#eee' : '#222', color: theme === 'light' ? '#222' : '#eee', minHeight: '200px' }}>
+                <h1>Part 10: Context API</h1>
+                <ThemeButton />
+            </div>
+        </ThemeContext.Provider>
+    );
+}
